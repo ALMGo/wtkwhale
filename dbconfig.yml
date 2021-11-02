@@ -1,4 +1,4 @@
 development:
   dialect: sqlite3
-  datasource: test.db?_foreign_keys=on
+  datasource: wtkwhales.db?_foreign_keys=on
   dir: migrations/sqlite3
