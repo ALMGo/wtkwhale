@@ -1,0 +1,10 @@
+
+-- +migrate Up
+
+CREATE TABLE config (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- +migrate Down
+DROP TABLE config;

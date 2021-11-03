@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/almaclaine/ethplorer"
 	"github.com/almaclaine/whalenamegenerator"
 	"github.com/jmoiron/sqlx"
@@ -59,4 +60,25 @@ func findHolder(holders *ethplorer.TopTokenHolders, address string) int {
 		}
 	}
 	return -1
+}
+
+func setupConfig(conn *sqlx.DB) (Config, error) {
+	exists, err := ExistsConfig(conn)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if !exists {
+		err = CreateConfig(conn)
+		if err != nil {
+			return Config{}, err
+		}
+	}
+
+	config, err := GetConfig(conn)
+
+	if err != nil {
+		return Config{}, err
+	}
+	return config, nil
 }

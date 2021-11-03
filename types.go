@@ -10,3 +10,8 @@ type Whale struct {
 	LastSent time.Time `db:"last_sent"`
 	LastReceived time.Time `db:"last_received"`
 }
+
+type Config struct {
+	Id int64 `db:"id"`
+	LastUpdated time.Time `db:"last_updated"`
+}
