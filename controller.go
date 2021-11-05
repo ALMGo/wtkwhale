@@ -61,9 +61,14 @@ func CreateWhale(conn *sqlx.DB, address string) error {
 		return errors.New("invalid ethereum address")
 	}
 
-	name, err := getWhaleName(conn)
-	if err != nil {
-		return err
+	name := ""
+	if val, ok := wellKnownWhales[address]; ok {
+		name = val
+	} else {
+		name, err = getWhaleName(conn)
+		if err != nil {
+			return err
+		}
 	}
 
 	sql, args, err := squirrel.Insert("whale").
